@@ -19,7 +19,7 @@ prog=sfs
 cd lighter_sf && ../syrupy.py --command-in-front --show-command --no-raw-process-log --syrupy-in-front --separator=, --no-align -i 3 ./torch -r $INPUT1 -k $K 3200000000 5 > ../runs/${date}.${INPUT}.${K}.1.$prog 2>../runs/${date}.${INPUT}.${K}.2.$prog
 cd ..
 prog=bf2
-cd lighter_bf2 && ../syrupy.py --command-in-front --show-command --no-raw-process-log --syrupy-in-front --separator=, --no-align -i 5 ./torch -r $INPUT1 -k $K 3200000000 5 > ../runs/${date}.${INPUT}.${K}.1.$prog 2>../runs/${date}.${INPUT}.${K}.2.$prog
+cd lighter_bf2 && export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./ && ../syrupy.py --command-in-front --show-command --no-raw-process-log --syrupy-in-front --separator=, --no-align -i 5 ./torch -r $INPUT1 -k $K 3200000000 5 > ../runs/${date}.${INPUT}.${K}.1.$prog 2>../runs/${date}.${INPUT}.${K}.2.$prog
 cd ..
 prog=cml
 cd lighter_cml && ../syrupy.py --command-in-front --show-command --no-raw-process-log --syrupy-in-front --separator=, --no-align -i 10 ./torch -r $INPUT1 -k $K 3200000000 5 > ../runs/${date}.${INPUT}.${K}.1.$prog 2>../runs/${date}.${INPUT}.${K}.2.$prog
