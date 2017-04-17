@@ -57,4 +57,4 @@ for my $e (keys %h)
 }
 my $count1=scalar (keys %h);
 
-print "$total\t$total_clean\t$count1\t$count2\n";
+print "$total,$total_clean,$count1,$count2\n";
