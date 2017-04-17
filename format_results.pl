@@ -70,7 +70,7 @@ foreach my $f (`ls $dir | sort -t'.' -k7,7 -k6,6n`)
 			$run_time=$1 if($line=~/Total run time.+ (\d+\.\d+) second\(s\)$/);
 			$sampled=$1 if($line=~/Completed running.+([\d\.]+)$/);
 			next if($prog eq 'sqr' || $prog eq 'kmc' || $prog eq 'perl');
-			$nkmers_seen=$1 if($line=~/Non-unique K-mers seen (\d+)$/);	
+			$nkmers_seen=$1 if($line=~/Non-unique K-mers seen (\d+)$/);
 			$nkmers_added=$2 if($line=~/(Non|mostly)-unique K-mers added (\d+)$/);	
 			$nkmers_uniq_gt_1=$1 if($line=~/total # of kmers with > 1 occurrences: (\d+)$/);
 		}
@@ -80,6 +80,6 @@ foreach my $f (`ls $dir | sort -t'.' -k7,7 -k6,6n`)
 		$d_nkmers_seen = $nkmers_seen_clean-$c_nkmers_seen_clean if($prog eq 'kmc' || $prog eq 'sqr');
 		my $d_nkmers_added = $nkmers_added-$c_nkmers_added;
 		my $d_nkmers_uniq_gt_1 = $nkmers_uniq_gt_1-$c_nkmers_uniq_gt_1;
-		print "$prog\t$fname\t$nreads\t$k\t$run_time\t$max_rss\t$max_vmem\t$d_nkmers_seen\t$d_nkmers_added\t$d_nkmers_uniq_gt_1\t$nkmers_seen\t$nkmers_added\t$nkmers_uniq_gt_1\t$sampled\n";
+		print "$prog\t$fname\t$nreads\t$k\t$run_time\t$max_rss\t$max_vmem\t$d_nkmers_seen\t$d_nkmers_added\t$d_nkmers_uniq_gt_1\t$nkmers_seen\t$nkmers_seen_clean\t$nkmers_added\t$nkmers_uniq_gt_1\t$sampled\n";
 	}
 }
