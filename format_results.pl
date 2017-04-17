@@ -4,8 +4,11 @@ use strict;
 use warnings;
 
 my $dir = shift;
+my $correct = shift;
 
-print "program\tfilename\tnum_reads\tK\trun_time\tmax_rss\tmax_vmem\ttotal_kmers\ttotal_kmers_added\tnum_kmers_gt_1\tsampled\n";
+my ($c_nkmers_seen,$c_nkmers_added,$c_nkmers_uniq_gt_1)=split(/,/,$correct);
+
+print "program\tfilename\tnum_reads\tK\trun_time\tmax_rss\tmax_vmem\tdiff_total_kmers\tdiff_total_kmers_added\tdiff_num_kmers_gt_1\ttotal_kmers\ttotal_kmers_added\tnum_kmers_gt_1\tsampled\n";
 my $max_rss = 0;
 my $max_vmem = 0;
 foreach my $f (`ls $dir | sort -t'.' -k7,7 -k6,6n`)
@@ -46,6 +49,9 @@ foreach my $f (`ls $dir | sort -t'.' -k7,7 -k6,6n`)
 		}
 		$sampled = ($sampled < 1 && $sampled > 0) ? 1 : 0;
 		close(IN);
-		print "$prog\t$fname\t$nreads\t$k\t$run_time\t$max_rss\t$max_vmem\t$nkmers_seen\t$nkmers_added\t$nkmers_uniq_gt_1\t$sampled\n";
+		my $d_nkmers_seen = abs($nkmers_seen-$c_nkmers_seen);
+		my $d_nkmers_added = abs($nkmers_added-$c_nkmers_added);
+		my $d_nkmers_uniq_gt_1 = abs($nkmers_uniq_gt_1-$c_nkmers_uniq_gt_1);
+		print "$prog\t$fname\t$nreads\t$k\t$run_time\t$max_rss\t$max_vmem\t$d_nkmers_seen\t$d_nkmers_added\t$d_nkmers_uniq_gt_1\t$nkmers_seen\t$nkmers_added\t$nkmers_uniq_gt_1\t$sampled\n";
 	}
 }
