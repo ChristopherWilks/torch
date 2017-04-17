@@ -7,7 +7,7 @@ K=21
 K_sq=27
 
 prog=kmc
-cd kmc3 && ../syrupy.py --command-in-front --show-command --no-raw-process-log --syrupy-in-front --separator=, --no-align -i 1 ./kmc -k$K -m900 $INPUT1 > ../runs/${date}.${INPUT}.${K}.1.$prog 2>../runs/${date}.${INPUT}.${K}.2.$prog
+cd kmc3 && ../syrupy.py --command-in-front --show-command --no-raw-process-log --syrupy-in-front --separator=, --no-align -i 1 ./kmc -k$K -m900 $INPUT1 ${INPUT1}.kmc3 ./ > ../runs/${date}.${INPUT}.${K}.1.$prog 2>../runs/${date}.${INPUT}.${K}.2.$prog
 cd ..
 prog=sqr
 cd squeakr && ../syrupy.py --command-in-front --show-command --no-raw-process-log --syrupy-in-front --separator=, --no-align -i 1 ./main 0 $K_sq 1 $INPUT1 > ../runs/${date}.${INPUT}.${K}.1.$prog 2>../runs/${date}.${INPUT}.${K}.2.$prog
