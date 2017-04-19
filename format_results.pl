@@ -16,6 +16,7 @@ my $nkmers_seen_clean = 0;
 my $nkmers_added = 0;
 my $nkmers_uniq_gt_1 = 0;
 
+my @all;
 foreach my $f (`ls $dir | sort -t'.' -k6,6 -k5,5n`)
 {
 	chomp($f);
@@ -71,6 +72,7 @@ foreach my $f (`ls $dir | sort -t'.' -k6,6 -k5,5n`)
 				$run_time = $3;
 				$run_time += (60*$2);
 				$run_time += (60*60*$1);
+				$run_time = sprintf("%.0f",$run_time);
 			}
 			$sampled=$1 if($line=~/Completed running.+([\d\.]+)$/);
 			next if($prog eq 'sqr' || $prog eq 'kmc' || $prog eq 'perl');
@@ -84,6 +86,20 @@ foreach my $f (`ls $dir | sort -t'.' -k6,6 -k5,5n`)
 		$d_nkmers_seen = $nkmers_seen_clean-$c_nkmers_seen_clean if($prog eq 'kmc' || $prog eq 'sqr');
 		my $d_nkmers_added = $nkmers_added-$c_nkmers_added;
 		my $d_nkmers_uniq_gt_1 = $nkmers_uniq_gt_1-$c_nkmers_uniq_gt_1;
-		print "$prog\t$fname\t$nreads\t$k\t$run_time\t$max_rss\t$max_vmem\t$d_nkmers_seen\t$d_nkmers_added\t$d_nkmers_uniq_gt_1\t$nkmers_seen\t$nkmers_seen_clean\t$nkmers_added\t$nkmers_uniq_gt_1\t$sampled\n";
+
+		$max_vmem = sprintf("%.0f",$max_vmem/1000);
+		$max_rss = sprintf("%.0f",$max_rss/1000);
+
+		push(@all,"$prog\t$fname\t$nreads\t$k\t$run_time\t$max_rss\t$max_vmem\t$d_nkmers_seen\t$d_nkmers_added\t$d_nkmers_uniq_gt_1\t$nkmers_seen\t$nkmers_seen_clean\t$nkmers_added\t$nkmers_uniq_gt_1\t$sampled\n");
 	}
+}
+my @s_=sort {my @f1=split(/\t/,$a); my @f2=split(/\t/,$b); return abs($f1[9]) <=> abs($f2[9]);} @all;
+foreach my $s_ (@s_)
+{
+	#my @s1=split(/\t/,$s_);
+	#$s1[4]=sprintf("%.0f",$s1[4]);
+	#$s1[5]=sprintf("%.0f",$s1[5]/1000); 
+	#$s1[6]=sprintf("%.0f",$s1[6]/1000); 
+	#$s_=join("\t",@s1);
+	print "$s_";
 }
