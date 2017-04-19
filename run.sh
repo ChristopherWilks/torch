@@ -13,6 +13,9 @@ prog=perl
 prog=kmc
 cd kmc3 && ../syrupy.py --command-in-front --show-command --no-raw-process-log --syrupy-in-front --separator=, --no-align -i 1 ./kmc -k$K -m900 $INPUT1 ${INPUT1}.kmc3 ./ > ../runs/${date}/${INPUT}.${K}.1.$prog 2>../runs/${date}/${INPUT}.${K}.2.$prog
 cd ..
+squeakr/clean_env.sh
+module load gcc/4.8.2
+source squeakr/env.sh
 prog=sqr
 cd squeakr && ../syrupy.py --command-in-front --show-command --no-raw-process-log --syrupy-in-front --separator=, --no-align -i 1 ./main 0 $K_sq 1 $INPUT1 > ../runs/${date}/${INPUT}.${K}.1.$prog 2>../runs/${date}/${INPUT}.${K}.2.$prog
 cd ..
