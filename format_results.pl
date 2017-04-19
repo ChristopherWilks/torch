@@ -8,7 +8,7 @@ my $correct = shift;
 
 my ($c_nkmers_seen,$c_nkmers_seen_clean,$c_nkmers_added,$c_nkmers_uniq_gt_1)=split(/,/,$correct);
 
-print "program\tfilename\tnum_reads\tK\trun_time\tmax_rss\tmax_vmem\tdiff_total_kmers\tdiff_total_kmers_added\tdiff_num_kmers_gt_1\ttotal_kmers\ttotal_kmers_added\tnum_kmers_gt_1\tsampled\n";
+print "program\tfilename\tnum_reads\tK\trun_time (sec)\tmax_rss (MB)\tmax_vmem (MB)\tdiff_total_kmers\tdiff_total_kmers_added\tdiff_num_kmers_gt_1\ttotal_kmers\ttotal_kmers_added\tnum_kmers_gt_1\tsampled\n";
 my $max_rss = 0;
 my $max_vmem = 0;
 my $nkmers_seen = 0;
@@ -16,11 +16,10 @@ my $nkmers_seen_clean = 0;
 my $nkmers_added = 0;
 my $nkmers_uniq_gt_1 = 0;
 
-foreach my $f (`ls $dir | sort -t'.' -k7,7 -k6,6n`)
+foreach my $f (`ls $dir | sort -t'.' -k6,6 -k5,5n`)
 {
 	chomp($f);
-	my ($date,$fname,$ftype,$nreads,$k,$fnum,$prog)=split(/\./,$f);
-	#print "$date,$fname,$ftype,$nreads,$k,$fnum,$prog\n";
+	my ($fname,$ftype,$nreads,$k,$fnum,$prog)=split(/\./,$f);
 	my $sampled=0;
 	my $run_time = 0;
 	
@@ -67,7 +66,12 @@ foreach my $f (`ls $dir | sort -t'.' -k7,7 -k6,6n`)
 		while(my $line = <IN>)
 		{
 			chomp($line);
-			$run_time=$1 if($line=~/Total run time.+ (\d+\.\d+) second\(s\)$/);
+			if($line=~/Total run time.+ (\d+) hour.+ (\d+) minute.+ (\d+\.\d+) second\(s\)$/)
+			{
+				$run_time = $3;
+				$run_time += (60*$2);
+				$run_time += (60*60*$1);
+			}
 			$sampled=$1 if($line=~/Completed running.+([\d\.]+)$/);
 			next if($prog eq 'sqr' || $prog eq 'kmc' || $prog eq 'perl');
 			$nkmers_seen=$1 if($line=~/Non-unique K-mers seen (\d+)$/);
