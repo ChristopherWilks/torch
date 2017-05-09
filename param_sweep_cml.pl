@@ -14,7 +14,9 @@ foreach my $d ((7,10,12,15,20))
 			foreach my $b ((8,16,20,32,50))
 			{
 				my ($e1,$e2) = split(/\./,$e);
-				my $new_cmd = "$cmd -d $d -w $w -e $e -b $b > ../sweeps/$prog/p$d.$w.$e2.$b.1 2> ../sweeps/$prog/p$d.$w.$e2.$b.2";
+				my $outfile1 = "../sweeps/$prog/p$d.$w.$e2.$b.1";
+				next if -e $outfile1;
+				my $new_cmd = "$cmd -d $d -w $w -e $e -b $b > $outfile1 2> ../sweeps/$prog/p$d.$w.$e2.$b.2";
 				`$new_cmd`;
 			}
 		}
