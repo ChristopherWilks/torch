@@ -5,10 +5,11 @@ use warnings;
 
 my $dir = shift;
 my $correct = shift;
+my $sampled_ = shift;
 
 my ($c_nkmers_seen,$c_nkmers_seen_clean,$c_nkmers_added,$c_nkmers_uniq_gt_1)=split(/,/,$correct);
 
-print "program\tfilename\tnum_reads\tK\trun_time (sec)\tmax_rss (MB)\tmax_vmem (MB)\tdiff_total_kmers\tdiff_total_kmers_added\tdiff_num_kmers_gt_1\ttotal_kmers\ttotal_kmers_added\tnum_kmers_gt_1\tsampled\n";
+print "program\tfilename\tnum_reads\tK\trun_time\tmax_rss\tmax_vmem\tdiff_total_kmers\tdiff_total_kmers_added\tdiff_num_kmers_gt_1\ttotal_kmers\ttotal_kmers_clean\ttotal_kmers_added\tnum_kmers_gt_1\tsampled\n";
 my $max_rss = 0;
 my $max_vmem = 0;
 my $nkmers_seen = 0;
@@ -22,6 +23,7 @@ foreach my $f (`ls $dir | sort -t'.' -k6,6 -k5,5n`)
 	chomp($f);
 	my ($fname,$ftype,$nreads,$k,$fnum,$prog)=split(/\./,$f);
 	my $sampled=0;
+	$sampled = 1 if($sampled_);
 	my $run_time = 0;
 	
 	
