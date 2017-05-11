@@ -2,17 +2,14 @@
 
 date=`date +%Y%m%d%H%M%S`
 #INPUT=SRR197986_1.fastq.1m
-INPUT=$1
-SAMPLE=$2;
-#SAMPLE_=$((${SAMPLE} / 100))
-SAMPLE_=`bc <<< "scale = 2; ${SAMPLE} / 100"`
+INPUT=1m
 INPUT1=../tests/SRR197986_1.fastq.${INPUT}
-LPARAMS="1230890000 ${SAMPLE_}"
+LPARAMS="1230890000 5"
 #LPARAMS="3200000000 5"
 K=21
 K_sq=27
 
-date=${INPUT}.${SAMPLE}.${date}
+date=${INPUT}.full.${date}
 mkdir runs/${date}
 #prog=perl
 #./syrupy.py --command-in-front --show-command --no-raw-process-log --syrupy-in-front --separator=, --no-align -i 1 perl ./count_kmers.pl tests/${INPUT} > ./runs/${date}/${INPUT}.${K}.1.$prog 2> ./runs/${date}/${INPUT}.${K}.2.$prog
