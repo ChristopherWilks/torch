@@ -5,25 +5,29 @@ use warnings;
 
 my $dir = shift;
 my $correct = shift;
-my $sampled_ = shift;
+my $sampled = shift;
 
 my ($c_nkmers_seen,$c_nkmers_seen_clean,$c_nkmers_added,$c_nkmers_uniq_gt_1)=split(/,/,$correct);
 
-print "program\tfilename\tnum_reads\tK\trun_time\tmax_rss\tmax_vmem\tdiff_total_kmers\tdiff_total_kmers_added\tdiff_num_kmers_gt_1\ttotal_kmers\ttotal_kmers_clean\ttotal_kmers_added\tnum_kmers_gt_1\tsampled\n";
+#print "program\tfilename\tnum_reads\tK\trun_time\tmax_rss\tmax_vmem\tdiff_total_kmers\tdiff_total_kmers_added\tdiff_num_kmers_gt_1\ttotal_kmers\ttotal_kmers_clean\ttotal_kmers_added\tnum_kmers_gt_1\tavg_abs_diff_in\tavg_abs_diff_out\tsampled\n";
 my $max_rss = 0;
 my $max_vmem = 0;
 my $nkmers_seen = 0;
 my $nkmers_seen_clean = 0;
 my $nkmers_added = 0;
 my $nkmers_uniq_gt_1 = 0;
+my $avg_abs_diff_in = 0.0;
+my $avg_abs_diff_out = 0.0;
 
 my @all;
-foreach my $f (`ls $dir | sort -t'.' -k6,6 -k5,5n`)
+#foreach my $f (`ls $dir | sort -t'.' -k6,6 -k5,5n`)
+foreach my $f (`ls $dir | sort -t'.' -k4,4 -k3,3n`)
 {
 	chomp($f);
-	my ($fname,$ftype,$nreads,$k,$fnum,$prog)=split(/\./,$f);
-	my $sampled=0;
-	$sampled = 1 if($sampled_);
+	#my ($fname,$ftype,$nreads,$k,$fnum,$prog)=split(/\./,$f);
+	my ($nreads,$k,$fnum,$prog)=split(/\./,$f);
+	#my $sampled=0;
+	#$sampled = 1 if($sampled_);
 	my $run_time = 0;
 	
 	
@@ -35,6 +39,8 @@ foreach my $f (`ls $dir | sort -t'.' -k6,6 -k5,5n`)
 		$nkmers_seen_clean = 0;
 		$nkmers_added = 0;
 		$nkmers_uniq_gt_1 = 0;
+		$avg_abs_diff_in = 0.0;
+		$avg_abs_diff_out = 0.0;
 		foreach my $e (`grep "S_Y_P" $dir/$f | cut -f2-`)
 		{
 			chomp($e);
@@ -76,13 +82,15 @@ foreach my $f (`ls $dir | sort -t'.' -k6,6 -k5,5n`)
 				$run_time += (60*60*$1);
 				$run_time = sprintf("%.0f",$run_time);
 			}
-			$sampled=$1 if($line=~/Completed running.+([\d\.]+)$/);
+			#$sampled=$1 if($line=~/Completed running.+([\d\.]+)$/);
 			next if($prog eq 'sqr' || $prog eq 'kmc' || $prog eq 'perl');
 			$nkmers_seen=$1 if($line=~/Non-unique K-mers seen (\d+)$/);
 			$nkmers_added=$2 if($line=~/(Non|mostly)-unique K-mers added (\d+)$/);	
 			$nkmers_uniq_gt_1=$1 if($line=~/total # of kmers with > 1 occurrences: (\d+)$/);
+			$avg_abs_diff_in=$1 if($line=~/^avg diff: (.+)$/);
+			$avg_abs_diff_out=$1 if($line=~/^avg diff outgroup: (.+)$/);
 		}
-		$sampled = ($sampled < 1 && $sampled > 0) ? 1 : 0;
+		#$sampled = ($sampled < 1 && $sampled > 0) ? 1 : 0;
 		close(IN);
 		my $d_nkmers_seen = $nkmers_seen-$c_nkmers_seen;
 		$d_nkmers_seen = $nkmers_seen_clean-$c_nkmers_seen_clean if($prog eq 'kmc' || $prog eq 'sqr');
@@ -92,7 +100,7 @@ foreach my $f (`ls $dir | sort -t'.' -k6,6 -k5,5n`)
 		$max_vmem = sprintf("%.0f",$max_vmem/1000);
 		$max_rss = sprintf("%.0f",$max_rss/1000);
 
-		push(@all,"$prog\t$fname\t$nreads\t$k\t$run_time\t$max_rss\t$max_vmem\t$d_nkmers_seen\t$d_nkmers_added\t$d_nkmers_uniq_gt_1\t$nkmers_seen\t$nkmers_seen_clean\t$nkmers_added\t$nkmers_uniq_gt_1\t$sampled\n");
+		push(@all,"$prog\t\t$nreads\t$k\t$run_time\t$max_rss\t$max_vmem\t$d_nkmers_seen\t$d_nkmers_added\t$d_nkmers_uniq_gt_1\t$nkmers_seen\t$nkmers_seen_clean\t$nkmers_added\t$nkmers_uniq_gt_1\t$avg_abs_diff_in\t$avg_abs_diff_out\t$sampled\n");
 	}
 }
 my @s_=sort {my @f1=split(/\t/,$a); my @f2=split(/\t/,$b); return abs($f1[9]) <=> abs($f2[9]);} @all;
