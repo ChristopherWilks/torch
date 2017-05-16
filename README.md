@@ -12,6 +12,8 @@ https://github.com/jeetsukumaran/Syrupy
 
 for time/memory tracking.
 
+The following steps have been partially tested on a MARCC bigmem machine. 
+
 ## Setup
 This will grab the K-mer counting test read sets
 and the various sketch version of Lighter, KMC3, and squeakr
