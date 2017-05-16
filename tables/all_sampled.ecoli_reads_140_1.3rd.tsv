@@ -1,0 +1,3 @@
+program	filename	num_reads	K	run_time	max_rss	max_vmem	diff_total_kmers	diff_total_kmers_added	diff_num_kmers_gt_1	total_kmers	total_kmers_clean	total_kmers_added	num_kmers_gt_1	avg_abs_diff_in	avg_abs_diff_out	sampled
+sqr		7m	21	36	202	497	424228762	-5013258	-3424406	0	504065844	61526917	0	0	0	100
+kmc		7m	21	14	2260	886888	424228762	-4958460	6529660	0	504065844	61581715	9954066	0	0	100
