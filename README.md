@@ -18,7 +18,7 @@ and the various sketch version of Lighter, KMC3, and squeakr
 
 	./setup.sh
 
-## Run Chicken (SRR197986) K-mer Counting Tests
+## Run Chicken low-coverage (SRR197986) K-mer Counting Tests
 This will run multiple read sets with various sample sizes
 
 	./run_chicken.sh
@@ -27,4 +27,8 @@ This will run multiple read sets with various sample sizes
 This will run the full read set with various sample sizes
 
 	./run_ecoli_140x.sh
-	
+
+## Run Rcorrector sketch tests on Human chromosome 20 simulated reads
+Check the rcorrector\_results.tsv file for tabular results
+
+	./run_rcorrector_tests.sh	
