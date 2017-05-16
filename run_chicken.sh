@@ -8,3 +8,4 @@ do
 	done
 	./run_3rd_party.sh $F 
 done
+./format_multi_sampling_runs.sh	SRR197986_1.fastq
