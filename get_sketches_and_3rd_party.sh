@@ -14,8 +14,7 @@ git clone -b cqf https://github.com/ChristopherWilks/Rcorrector.git ./Rcorrector
 git clone -b cml https://github.com/ChristopherWilks/Rcorrector.git ./Rcorrector_cml
 git clone -b bf2 https://github.com/ChristopherWilks/Rcorrector.git ./Rcorrector_bf2
 
-#for i in lighter_cml lighter_cqf lighter_sf Rcorrector_original Rcorrector_cml Rcorrector_cqf
-for i in Rcorrector_original Rcorrector_cml Rcorrector_cqf
+for i in lighter_cml lighter_cqf lighter_sf Rcorrector_original Rcorrector_cml Rcorrector_cqf
 do
 	cd $i
 	make clean
