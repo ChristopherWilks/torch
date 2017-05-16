@@ -14,25 +14,34 @@ git clone -b cqf https://github.com/ChristopherWilks/Rcorrector.git ./Rcorrector
 git clone -b cml https://github.com/ChristopherWilks/Rcorrector.git ./Rcorrector_cml
 git clone -b bf2 https://github.com/ChristopherWilks/Rcorrector.git ./Rcorrector_bf2
 
-for i in lighter_cml lighter_cqf lighter_sf Rcorrector_original Rcorrector_cml Rcorrector_cqf
+#for i in lighter_cml lighter_cqf lighter_sf Rcorrector_original Rcorrector_cml Rcorrector_cqf
+for i in Rcorrector_original Rcorrector_cml Rcorrector_cqf
 do
-	cd $i && make clean && make
+	cd $i
+	make clean
+	make
 	cd ..
 done
 
 #special library needed for BF2 (TOMB) for counting BF
 source libbf/env.sh
 cd libbf
-./configure && make
+make clean
+./configure
+make
 cd ..
 
 source lighter_bf2/env.sh
 cd lighter_bf2
-ln -fs ../libbf/build/src/bf/libbf.so && make clean && make
+ln -fs ../libbf/build/src/bf/libbf.so
+make clean
+make
 cd ..
 
 cd Rcorrector_bf2
-ln -fs ../libbf/build/src/bf/libbf.so && make clean && make
+ln -fs ../libbf/build/src/bf/libbf.so
+make clean
+make
 cd ..
 
 #now 3rd party
@@ -44,5 +53,6 @@ cd ..
 
 source squeakr/env.sh
 cd squeakr
-make clean && make
+make clean
+make
 cd ..
