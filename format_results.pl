@@ -21,11 +21,14 @@ my $avg_abs_diff_out = 0.0;
 
 my @all;
 #foreach my $f (`ls $dir | sort -t'.' -k6,6 -k5,5n`)
-foreach my $f (`ls $dir | sort -t'.' -k4,4 -k3,3n`)
+$dir =~ /(\d+m)\.(\d+)$/;
+my $nreads = $1;
+foreach my $f (`ls $dir | sort -t'.' -k3,3 -k2,2n`)
 {
 	chomp($f);
 	#my ($fname,$ftype,$nreads,$k,$fnum,$prog)=split(/\./,$f);
-	my ($nreads,$k,$fnum,$prog)=split(/\./,$f);
+	#my ($nreads,$k,$fnum,$prog)=split(/\./,$f);
+	my ($k,$fnum,$prog)=split(/\./,$f);
 	#my $sampled=0;
 	#$sampled = 1 if($sampled_);
 	my $run_time = 0;
