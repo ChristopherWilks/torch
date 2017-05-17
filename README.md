@@ -14,6 +14,8 @@ for time/memory tracking.
 
 The following steps have been partially tested on a MARCC bigmem machine. 
 
+The simple K-mer counting tests will take 1) hours to run and 2) 10's of gigabytes of memory.
+
 ## Setup
 This will grab the K-mer counting test read sets
 and the various sketch version of Lighter, KMC3, and squeakr
