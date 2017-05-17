@@ -7,7 +7,7 @@ K=21
 K_sq=27
 
 #date=${INPUT}.${SAMPLE}.${date}
-date=${INPUT}.100b
+date=${INPUT}.100
 mkdir runs/${date}
 
 prog=kmc
