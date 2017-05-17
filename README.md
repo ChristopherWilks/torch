@@ -7,11 +7,6 @@ These include:
 -Slim-fat sketch (SF)
 -Counting Quotient Filter (CQF)
 
-Also contains a copy of the main scripts from:
-https://github.com/jeetsukumaran/Syrupy
-
-for time/memory tracking.
-
 The following steps have been partially tested on a MARCC bigmem machine. 
 
 The simple K-mer counting tests will take 1) hours to run and 2) 10's of gigabytes of memory.
@@ -36,3 +31,20 @@ This will run the full read set with various sample sizes
 Check the rcorrector\_results.tsv file for tabular results
 
 	./run_rcorrector_tests.sh	
+
+
+Also this repo contains a copy of the scripts from:
+https://github.com/jeetsukumaran/Syrupy
+
+for time/memory tracking.
+
+Code/libraries were forked/included from the following repos:
+
+https://github.com/mourisl/Rcorrector
+https://github.com/mourisl/rcorrector\_paper\_script
+https://github.com/mourisl/Lighter
+https://github.com/mourisl/Lighter\_paper
+https://github.com/splatlab/squeakr
+https://github.com/mavam/libbf
+https://github.com/paper2017/SF-sketch
+https://github.com/efficient/cuckoofilter
