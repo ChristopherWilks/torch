@@ -8,11 +8,11 @@ rm tmp_ee5818769bb7b8219347f982bed69089.bc
 rm tmp_ee5818769bb7b8219347f982bed69089.mer_counts
 
 #do initial JellyFish2 counting
-./Rcorrector/jellyfish/bin/jellyfish bc -m 23 -s 100000000 -C -t 1 -o tmp_ee5818769bb7b8219347f982bed69089.bc <(gzip -cd ./tests/sim_chr20_read1.fq.gz) <(gzip -cd ./tests/sim_chr20_read2.fq.gz)
+./Rcorrector_original/jellyfish/bin/jellyfish bc -m 23 -s 100000000 -C -t 1 -o tmp_ee5818769bb7b8219347f982bed69089.bc <(gzip -cd ./tests/sim_chr20_read1.fq.gz) <(gzip -cd ./tests/sim_chr20_read2.fq.gz)
 
-./Rcorrector/jellyfish/bin/jellyfish count -m 23 -s 100000 -C -t 1 --bc tmp_ee5818769bb7b8219347f982bed69089.bc -o tmp_ee5818769bb7b8219347f982bed69089.mer_counts <(gzip -cd ./tests/sim_chr20_read1.fq.gz) <(gzip -cd ./tests/sim_chr20_read2.fq.gz)
+./Rcorrector_original/jellyfish/bin/jellyfish count -m 23 -s 100000 -C -t 1 --bc tmp_ee5818769bb7b8219347f982bed69089.bc -o tmp_ee5818769bb7b8219347f982bed69089.mer_counts <(gzip -cd ./tests/sim_chr20_read1.fq.gz) <(gzip -cd ./tests/sim_chr20_read2.fq.gz)
 
-./Rcorrector/jellyfish/bin/jellyfish dump -L 2 tmp_ee5818769bb7b8219347f982bed69089.mer_counts > tmp_ee5818769bb7b8219347f982bed69089.jf_dump
+./Rcorrector_original/jellyfish/bin/jellyfish dump -L 2 tmp_ee5818769bb7b8219347f982bed69089.mer_counts > tmp_ee5818769bb7b8219347f982bed69089.jf_dump
 
 #now run original and drop-in sketch versions
 for i in Rcorrector_original Rcorrector_cqf Rcorrector_cml Rcorrector_bf2
