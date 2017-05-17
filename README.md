@@ -41,9 +41,9 @@ for time/memory tracking.
 Code/libraries were forked/included from the following repos:
 
 * https://github.com/mourisl/Rcorrector
-* https://github.com/mourisl/rcorrector\_paper\_script
+* https://github.com/mourisl/rcorrector_paper_script
 * https://github.com/mourisl/Lighter
-* https://github.com/mourisl/Lighter\_paper
+* https://github.com/mourisl/Lighter_paper
 * https://github.com/splatlab/squeakr
 * https://github.com/mavam/libbf
 * https://github.com/paper2017/SF-sketch
