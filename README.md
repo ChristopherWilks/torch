@@ -2,15 +2,10 @@
 Currently Torch is for comparing various probabilistic data structures for use in D/RNA k-mer counting.
 
 These include:
--Multi layer spectral bloom filters (BF2)
--Count-min sketch w/ log counter (CML)
--Slim-fat sketch (SF)
--Counting Quotient Filter (CQF)
-
-Also contains a copy of the main scripts from:
-https://github.com/jeetsukumaran/Syrupy
-
-for time/memory tracking.
+* Multi layer spectral bloom filters (BF2)
+* Count-min sketch w/ log counter (CML)
+* Slim-fat sketch (SF)
+* Counting Quotient Filter (CQF)
 
 The following steps have been partially tested on a MARCC bigmem machine. 
 
@@ -36,3 +31,20 @@ This will run the full read set with various sample sizes
 Check the rcorrector\_results.tsv file for tabular results
 
 	./run_rcorrector_tests.sh	
+
+
+Also this repo contains a copy of the scripts from:
+https://github.com/jeetsukumaran/Syrupy
+
+for time/memory tracking.
+
+Code/libraries were forked/included from the following repos:
+
+* https://github.com/mourisl/Rcorrector
+* https://github.com/mourisl/rcorrector_paper_script
+* https://github.com/mourisl/Lighter
+* https://github.com/mourisl/Lighter_paper
+* https://github.com/splatlab/squeakr
+* https://github.com/mavam/libbf
+* https://github.com/paper2017/SF-sketch
+* https://github.com/efficient/cuckoofilter
