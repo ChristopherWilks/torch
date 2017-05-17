@@ -15,6 +15,7 @@ rm tmp_ee5818769bb7b8219347f982bed69089.mer_counts
 ./Rcorrector_original/jellyfish/bin/jellyfish dump -L 2 tmp_ee5818769bb7b8219347f982bed69089.mer_counts > tmp_ee5818769bb7b8219347f982bed69089.jf_dump
 
 #now run original and drop-in sketch versions
+source Rcorrector_bf2/env.sh
 for i in Rcorrector_original Rcorrector_cqf Rcorrector_cml Rcorrector_bf2
 do
 	cd ${i}
